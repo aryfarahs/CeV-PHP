@@ -1,0 +1,68 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body {
+    background-image: linear-gradient(to bottom, blue 10%, blueviolet 90%);
+    color: whitesmoke;
+    min-height: 100vh;
+}
+
+h1 {
+    margin-top: 70px;
+    font-size: 48px;
+    text-align: center;
+}
+
+input {
+    padding: 5px;
+}
+
+footer {
+    text-align: center;
+    padding-bottom: 2px;
+    padding-top: 5px;
+}
+
+main {
+    background-color: white;
+    margin: auto;
+    width: fit-content;
+    padding: 15px;
+    margin-top: 70px;
+    border-radius: 10px;
+}
+
+a {
+    color: black;
+    text-align: center;
+}
+
+p {
+    margin: 20px;
+}
+
+.forml {
+    background-image: linear-gradient(to bottom, violet, purple);
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: black;
+    row-gap: 10px;
+    padding: 10px;
+    margin: auto;
+    width: 200px;
+    font-size: 24px;
+}
+
+.butao {
+    width: 50%;
+    padding: 5px;
+    margin: auto;
+}
+
+
+

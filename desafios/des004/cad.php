@@ -4,29 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Analisando Valores</title>
+    <title>Resultado</title>
 </head>
 <body>
     <header>
-        <h1>Resultados</h1>
+        <h1>Valor Obtido</h1>
     </header>
 
     <main>
         <p>
-            <?php 
-                
-                $num = $_GET['num'] ?? 0;
-                $intnum = (int)$num ;
-                $decnum = $num - $intnum;
-                
-                echo "Você digitou o número " . number_format($num, 3, ",", ".") . "<br><br>";
-                echo "A parte <strong>INTEIRA</strong> é: " . number_format($intnum, 0, ",", ".") . "<br>";
-                echo "A parte <strong>DECIMAL</strong> é: " . number_format($decnum, 3, ",", ".");
+            <?php
+                $inicio = date("m-d-Y", strtotime("- 7 days"));
+                $fim = date("m-d-Y");
+                $url = 'https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarPeriodo(dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)?@dataInicial=\''. $inicio .'\'&@dataFinalCotacao=\''. $fim .'\'&$top=1&$orderby=dataHoraCotacao%20desc&$format=json&$select=cotacaoCompra,dataHoraCotacao';
 
+                $dados = json_decode(file_get_contents($url), true);
+                $cotacao = $dados["value"][0]["cotacaoCompra"];
+            
+
+                $real = $_GET['real'];
+                $dolar = $real / $cotacao;
+
+                $padrao = numfmt_create("pt-BR", NumberFormatter::CURRENCY);
+
+                echo "<p>Seus " . numfmt_format_currency($padrao, $real, "BRL") . " equivalem a <strong>" . numfmt_format_currency($padrao, $dolar, "USD") . "</strong></p>";
+                echo '<p>*Cotação em tempo real feita pelo <a href="https://www.bcb.gov.br" target="_blank">Banco Central do Brasil</a></p>'
             ?>
         </p>
 
-        <button class="butao" onclick="javascript:history.go(-1)">Voltar</button>
+        <button class="butao" onclick="javascript:history.go(-1)">VOLTAR</button>
     </main>
 </body>
 </html>
